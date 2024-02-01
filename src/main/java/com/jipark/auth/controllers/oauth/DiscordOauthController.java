@@ -1,7 +1,7 @@
 package com.jipark.auth.controllers.oauth;
 
 import com.jipark.auth.controllers.BaseController;
-import com.jipark.auth.dtos.request.oauth.discord.AuthorizeRequest;
+import com.jipark.auth.dtos.webclient.discod.AuthorizeRequest;
 import com.jipark.auth.services.DiscordOauthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

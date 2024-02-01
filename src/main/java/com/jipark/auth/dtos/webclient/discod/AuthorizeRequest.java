@@ -1,4 +1,4 @@
-package com.jipark.auth.dtos.request.oauth.discord;
+package com.jipark.auth.dtos.webclient.discod;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;

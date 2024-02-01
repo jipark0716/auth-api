@@ -18,22 +18,22 @@ import org.springframework.http.MediaType;
 
 @Component
 public class DiscordOauthService {
-    @Value("${oauth.discord.authorize-url}")
+    @Value("${discord.authorize-url}")
     private String authorizeUrl;
 
-    @Value("${oauth.discord.client-secret}")
+    @Value("${discord.client-secret}")
     private String clientSecret;
 
-    @Value("${oauth.discord.client-id}")
+    @Value("${discord.client-id}")
     private String clientId;
 
-    @Value("${oauth.discord.scope}")
+    @Value("${discord.scope}")
     private String scope;
     private final WebClient client;
 
     public DiscordOauthService(
-            @Value("${oauth.discord.grant-url}") String grantUrl,
-            @Value("${oauth.discord.basic-auth}") String basicAuth
+            @Value("${discord.grant-url}") String grantUrl,
+            @Value("${discord.basic-auth}") String basicAuth
     ) {
         client = WebClient
                 .builder()

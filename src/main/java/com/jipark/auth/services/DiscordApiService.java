@@ -1,19 +1,19 @@
 package com.jipark.auth.services;
 
-import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.entities.SelfUser;
-import org.springframework.stereotype.Component;
+import com.jipark.auth.dtos.webclient.discod.resources.User;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
-@Component
+@RequiredArgsConstructor
 public class DiscordApiService {
-    public JDA createJDA(String token) {
-        return JDABuilder.createDefault(token).build();
-    }
+    private final WebClient client;
 
-    public SelfUser getUser()
+    public Mono<User> getUser()
     {
-        return createJDA("OTU5MjMyNDI1MDc3MTE2OTY5.G607AJ.e66shFag1HBDXoAjoh6aUnHHnrPIh0OVro2-6E")
-                .getSelfUser();
+        return client.get()
+                .uri("/users/@me")
+                .retrieve()
+                .bodyToMono(User.class);
     }
 }

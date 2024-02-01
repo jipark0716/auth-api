@@ -7,13 +7,21 @@ spring:
         secret:
           property-sources[0]:
             endpoint: https://spring-auth-api.vault.azure.net/
+  datasource:
+    url: ${spring-datasource-url} #jdbc:mysql://<host>:<port>/<dbname>
+    username: ${spring-datasource-username} <username>
+    password: ${spring-datasource-password} <password>
+  jpa:
+    hibernate:
+      ddl-auto: update # 운영시에는 validate 추천
+    show-sql: true
 jwt:
   key: ${jwt-key}
-oauth:
-  discord:
-    grant-url: https://discord.com/api/v10/oauth2/token
-    authorize-url: https://discord.com/api/oauth2/authorize
-    client-id: ${oauth-discord-clientId]
-    client-secret: ${oauth-discord-clientSecret}
-    basic-auth: ${oauth-discord-basicAuth}
-    scope: "identify"
+discord:
+  base-url: https://discord.com/api/v10
+  grant-url: ${discord.base-url}/oauth2/token
+  authorize-url: ${discord.base-url}/oauth2/authorize
+  client-id: ${discord-clientId]
+  client-secret: ${discord-clientSecret}
+  basic-auth: ${discord-basicAuth}
+  scope: "identify"

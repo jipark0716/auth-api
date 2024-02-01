@@ -1,6 +1,6 @@
 package com.jipark.auth.discord;
 
-import com.jipark.auth.services.DiscordApiService;
+import com.jipark.auth.factories.DiscordApiClientFactory;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -14,12 +14,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class GetUserTest {
-    public final DiscordApiService discordApiService;
+    public final DiscordApiClientFactory factory;
 
-    @Test
+@Test
     public void test()
     {
-        discordApiService.getUser();
+        var user = factory.create("WLhDsEUo9GTPBcYW7YOI8Jez78juAl").getUser().block();
         assertTrue(true);
     }
 }
