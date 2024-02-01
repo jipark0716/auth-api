@@ -4,11 +4,15 @@ plugins {
 	id 'io.spring.dependency-management' version '1.1.4'
 }
 
+ext {
+	springCloudAzureVersion = "5.8.0"
+}
+
 group = 'com.jipark'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	sourceCompatibility = '17'
+	sourceCompatibility = '21'
 }
 
 repositories {
@@ -16,11 +20,26 @@ repositories {
 }
 
 dependencies {
+	implementation 'net.dv8tion:JDA:5.0.0-beta.20'
+	implementation 'com.azure.spring:spring-cloud-azure-starter-keyvault:5.0.0'
+	implementation 'com.azure.spring:spring-cloud-azure-starter-keyvault-secrets:5.0.0'
+	implementation 'com.azure.spring:spring-cloud-azure-dependencies:5.0.0'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+
+	testCompileOnly	'junit:junit:4.13.1'
+	testAnnotationProcessor 'junit:junit:4.13.1'
+	testCompileOnly 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'io.projectreactor:reactor-test'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "com.azure.spring:spring-cloud-azure-dependencies:$springCloudAzureVersion"
+	}
 }
 
 tasks.named('test') {

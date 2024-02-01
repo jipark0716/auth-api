@@ -1,0 +1,19 @@
+spring:
+  codec:
+    max-in-memory-size: 10MB
+  cloud:
+    azure:
+      keyvault:
+        secret:
+          property-sources[0]:
+            endpoint: https://spring-auth-api.vault.azure.net/
+jwt:
+  key: ${jwt-key}
+oauth:
+  discord:
+    grant-url: https://discord.com/api/v10/oauth2/token
+    authorize-url: https://discord.com/api/oauth2/authorize
+    client-id: ${oauth-discord-clientId]
+    client-secret: ${oauth-discord-clientSecret}
+    basic-auth: ${oauth-discord-basicAuth}
+    scope: "identify"
