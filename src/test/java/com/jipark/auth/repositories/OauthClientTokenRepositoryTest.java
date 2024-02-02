@@ -1,6 +1,6 @@
-package com.jipark.auth.discord;
+package com.jipark.auth.repositories;
 
-import com.jipark.auth.factories.DiscordApiClientFactory;
+import com.jipark.auth.repositories.game.OauthClientTokenRepository;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -12,12 +12,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
-public class GetUserTest {
-    public final DiscordApiClientFactory factory;
+public class OauthClientTokenRepositoryTest {
+    public final OauthClientTokenRepository repository;
 
     @Test
-    public void test() {
-        var user = factory.create("WLhDsEUo9GTPBcYW7YOI8Jez78juAl").getUser().block();
+    public void get() {
+        var result = repository.get();
         Assertions.assertTrue(true);
     }
 }

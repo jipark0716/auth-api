@@ -8,13 +8,11 @@ spring:
           property-sources[0]:
             endpoint: https://spring-auth-api.vault.azure.net/
   datasource:
-    url: ${spring-datasource-url} #jdbc:mysql://<host>:<port>/<dbname>
+    url: ${spring-datasource-url}
     username: ${spring-datasource-username} <username>
     password: ${spring-datasource-password} <password>
-  jpa:
-    hibernate:
-      ddl-auto: update # 운영시에는 validate 추천
-    show-sql: true
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
 jwt:
   key: ${jwt-key}
 discord:

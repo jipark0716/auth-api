@@ -2,6 +2,7 @@ package com.jipark.auth.services;
 
 import com.jipark.auth.dtos.oauth.DiscordResponse;
 import com.jipark.auth.exceptions.oauth.GrantFailException;
+import com.jipark.auth.factories.DiscordApiClientFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -14,10 +15,10 @@ import reactor.core.publisher.Mono;
 
 import java.net.URI;
 
-import org.springframework.http.MediaType;
-
 @Component
 public class DiscordOauthService {
+    private DiscordApiClientFactory discordApiClientFactory;
+
     @Value("${discord.authorize-url}")
     private String authorizeUrl;
 
@@ -47,7 +48,18 @@ public class DiscordOauthService {
         return getAuthorizeUrl(host.toString());
     }
 
-    public URI getAuthorizeUrl(String host) {
+    public Mono<String> Authorize(String code, URI redirectUri)
+    {
+        return grantToken(code, redirectUri.getScheme() + "://" + redirectUri.getAuthority() + redirectUri.getPath())
+                .flatMap(o -> {
+                    var discordUser = discordApiClientFactory.create(o.accessToken)
+                            .getUser();
+
+                    
+                });
+    }
+
+    private URI getAuthorizeUrl(String host) {
         return UriComponentsBuilder.fromHttpUrl(authorizeUrl)
                 .queryParam("response_type", "code")
                 .queryParam("client_id", clientId)
@@ -57,11 +69,7 @@ public class DiscordOauthService {
                 .toUri();
     }
 
-    public Mono<DiscordResponse> grantToken(String code, URI redirectUri) {
-        return grantToken(code, redirectUri.getScheme() + "://" + redirectUri.getAuthority() + redirectUri.getPath());
-    }
-
-    public Mono<DiscordResponse> grantToken(String code, String redirectUri)
+    private Mono<DiscordResponse> grantToken(String code, String redirectUri)
     {
         BodyInserters.FormInserter<String> request = BodyInserters.fromFormData("grant_type", "authorization_code")
                 .with("code", code)

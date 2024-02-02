@@ -31,14 +31,16 @@ dependencies {
 	implementation 'com.azure.spring:spring-cloud-azure-dependencies:5.0.0'
 
 	// database
-	compileOnly 'org.springframework.boot:spring-boot-starter-data-jpa'
-	compileOnly 'mysql:mysql-connector-java'
+	implementation 'mysql:mysql-connector-java:8.0.33'
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
 
 	// test
 	testCompileOnly	'junit:junit:4.13.1'
+	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
 	testAnnotationProcessor 'junit:junit:4.13.1'
 	testCompileOnly 'org.projectlombok:lombok'
 	testAnnotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'mysql:mysql-connector-java:8.0.33'
 	testImplementation 'io.projectreactor:reactor-test'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

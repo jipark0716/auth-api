@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jipark.auth.repositories.game.OauthClientTokenRepository">
+    <resultMap id="oauth-client-token" type="com.jipark.auth.entities.game.OauthClientToken">
+        <id column="id" property="id"/>
+        <result column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="provider_type" property="ProviderType"/>
+        <result column="access_token" property="accessToken"/>
+        <result column="refresh_token" property="refreshToken"/>
+        <result column="expires_at" property="expiresAt"/>
+        <result column="scope" property="scope"/>
+        <result column="issued_at" property="issuedAt"/>
+    </resultMap>
+    
+    <select id="get" resultMap="oauth-client-token">
+        SELECT * FROM `game`.`oauth_client_token`
+    </select>
+</mapper>
