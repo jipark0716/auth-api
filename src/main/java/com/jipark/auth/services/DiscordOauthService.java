@@ -1,8 +1,11 @@
 package com.jipark.auth.services;
 
 import com.jipark.auth.dtos.oauth.DiscordResponse;
+import com.jipark.auth.entities.emuns.OauthProviderType;
+import com.jipark.auth.entities.game.User;
 import com.jipark.auth.exceptions.oauth.GrantFailException;
 import com.jipark.auth.factories.DiscordApiClientFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -16,7 +19,8 @@ import reactor.core.publisher.Mono;
 import java.net.URI;
 
 @Component
-public class DiscordOauthService {
+public class DiscordOauthService extends BaseOauthService {
+    @Autowired
     private DiscordApiClientFactory discordApiClientFactory;
 
     @Value("${discord.authorize-url}")
@@ -28,14 +32,14 @@ public class DiscordOauthService {
     @Value("${discord.client-id}")
     private String clientId;
 
-    @Value("${discord.scope}")
-    private String scope;
     private final WebClient client;
 
     public DiscordOauthService(
+            @Value("${discord.scope}") String scope,
             @Value("${discord.grant-url}") String grantUrl,
             @Value("${discord.basic-auth}") String basicAuth
     ) {
+        super(OauthProviderType.discord, scope);
         client = WebClient
                 .builder()
                 .baseUrl(grantUrl)
@@ -48,15 +52,15 @@ public class DiscordOauthService {
         return getAuthorizeUrl(host.toString());
     }
 
-    public Mono<String> Authorize(String code, URI redirectUri)
-    {
+    public Mono<User> Authorize(String code, URI redirectUri) {
         return grantToken(code, redirectUri.getScheme() + "://" + redirectUri.getAuthority() + redirectUri.getPath())
-                .flatMap(o -> {
-                    var discordUser = discordApiClientFactory.create(o.accessToken)
-                            .getUser();
-
-                    
-                });
+                .checkpoint("success discord")
+                .flatMap(o ->
+                    discordApiClientFactory.create(o.getAccessToken())
+                        .getUser()
+                        .zipWith(Mono.just(o))
+                )
+                .flatMap(o -> createOrUpdate(o.getT1(), o.getT2()));
     }
 
     private URI getAuthorizeUrl(String host) {

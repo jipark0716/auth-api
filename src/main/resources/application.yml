@@ -7,12 +7,8 @@ spring:
         secret:
           property-sources[0]:
             endpoint: https://spring-auth-api.vault.azure.net/
-  datasource:
-    url: ${spring-datasource-url}
-    username: ${spring-datasource-username} <username>
-    password: ${spring-datasource-password} <password>
-mybatis:
-  mapper-locations: classpath:mapper/**/*.xml
+  r2dbc:
+    url: ${datasource-connectString}
 jwt:
   key: ${jwt-key}
 discord:

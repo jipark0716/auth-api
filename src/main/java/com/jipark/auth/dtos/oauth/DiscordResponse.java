@@ -6,19 +6,19 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class DiscordResponse {
+public class DiscordResponse implements OauthGrantResponse {
     @JsonProperty("access_token")
-    public String accessToken;
+    private String accessToken;
 
     @JsonProperty("token_type")
-    public String tokenType;
+    private String tokenType;
 
     @JsonProperty("expires_in")
-    public String expiresIn;
+    private int expiresIn;
 
     @JsonProperty("refresh_token")
-    public String refreshToken;
+    private String refreshToken;
 
     @JsonProperty("scope")
-    public String scope;
+    private String scope;
 }
