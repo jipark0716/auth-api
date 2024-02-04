@@ -3,6 +3,7 @@ package com.jipark.auth.controllers.oauth;
 import com.jipark.auth.controllers.BaseController;
 import com.jipark.auth.dtos.webclient.discod.AuthorizeRequest;
 import com.jipark.auth.services.DiscordOauthService;
+import com.jipark.auth.services.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,7 @@ import reactor.core.publisher.Mono;
 @Component
 public class DiscordOauthController extends BaseController {
     private final DiscordOauthService service;
+    private final JwtService jwtService;
 
     public Mono<ServerResponse> redirect(ServerRequest request) {
         return ServerResponse.status(HttpStatus.FOUND)
@@ -25,6 +27,8 @@ public class DiscordOauthController extends BaseController {
     public Mono<ServerResponse> authorize(ServerRequest request) {
         return request.bind(AuthorizeRequest.class)
                 .flatMap(o -> service.Authorize(o.code, request.uri()))
-                .flatMap(this::ok);
+                .flatMap(o -> {
+                    return ok(jwtService.generateJwtToken(o));
+                });
     }
 }

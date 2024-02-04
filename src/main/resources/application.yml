@@ -11,6 +11,8 @@ spring:
     url: ${datasource-connectString}
 jwt:
   key: ${jwt-key}
+  expires-in: 3600
+  refresh-expires-in: 604800
 discord:
   base-url: https://discord.com/api/v10
   grant-url: ${discord.base-url}/oauth2/token

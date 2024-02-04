@@ -40,6 +40,10 @@ dependencies {
 	annotationProcessor group: 'systems.manifold', name: 'manifold-ext', version: '2024.1.1'
 	testAnnotationProcessor group: 'systems.manifold', name: 'manifold-ext', version: '2024.1.1'
 
+	// etc
+	implementation 'io.jsonwebtoken:jjwt:0.12.5'
+	implementation 'javax.xml.bind:jaxb-api:2.3.1'
+
 	// test
 	testCompileOnly	'junit:junit:4.13.1'
 	testAnnotationProcessor 'junit:junit:4.13.1'
