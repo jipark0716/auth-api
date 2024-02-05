@@ -1,7 +1,7 @@
-package com.jipark.auth.controllers.oauth;
+package com.jipark.auth.http.controllers.oauth;
 
-import com.jipark.auth.controllers.BaseController;
-import com.jipark.auth.dtos.webclient.discod.AuthorizeRequest;
+import com.jipark.auth.http.controllers.BaseController;
+import com.jipark.auth.http.request.AuthorizeRequest;
 import com.jipark.auth.services.DiscordOauthService;
 import com.jipark.auth.services.JwtService;
 import lombok.RequiredArgsConstructor;
@@ -27,8 +27,6 @@ public class DiscordOauthController extends BaseController {
     public Mono<ServerResponse> authorize(ServerRequest request) {
         return request.bind(AuthorizeRequest.class)
                 .flatMap(o -> service.Authorize(o.code, request.uri()))
-                .flatMap(o -> {
-                    return ok(jwtService.generateJwtToken(o));
-                });
+                .flatMap(o -> ok(jwtService.generateJwtToken(o)));
     }
 }

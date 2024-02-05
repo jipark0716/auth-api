@@ -1,4 +1,4 @@
-package com.jipark.auth.controllers;
+package com.jipark.auth.http.controllers;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.BodyInserters;

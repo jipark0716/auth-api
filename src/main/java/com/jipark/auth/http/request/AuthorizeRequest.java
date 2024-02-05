@@ -1,4 +1,4 @@
-package com.jipark.auth.dtos.webclient.discod;
+package com.jipark.auth.http.request;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;

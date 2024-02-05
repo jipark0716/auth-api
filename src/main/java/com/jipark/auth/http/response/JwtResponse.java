@@ -1,4 +1,4 @@
-package com.jipark.auth.dtos.response;
+package com.jipark.auth.http.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
