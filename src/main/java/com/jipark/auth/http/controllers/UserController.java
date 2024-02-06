@@ -1,9 +1,7 @@
 package com.jipark.auth.http.controllers;
 
-import com.jipark.auth.http.request.AuthorizeRequest;
 import com.jipark.auth.http.request.FindByIdRequest;
 import com.jipark.auth.http.response.CollectionResponse;
-import com.jipark.auth.http.response.Response;
 import com.jipark.auth.repositories.game.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
