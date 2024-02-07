@@ -5,8 +5,8 @@ spring:
     azure:
       keyvault:
         secret:
-          property-sources[0]:
-            endpoint: https://spring-auth-api.vault.azure.net/
+          property-sources:
+            - endpoint: https://spring-auth-api.vault.azure.net/
   r2dbc:
     url: ${datasource-connectString}
 jwt:
