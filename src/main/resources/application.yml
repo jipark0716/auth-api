@@ -17,7 +17,7 @@ discord:
   base-url: https://discord.com/api/v10
   grant-url: ${discord.base-url}/oauth2/token
   authorize-url: ${discord.base-url}/oauth2/authorize
-  client-id: ${discord-clientId]
+  client-id: ${discord-clientId}
   client-secret: ${discord-clientSecret}
   basic-auth: ${discord-basicAuth}
   scope: "identify"
