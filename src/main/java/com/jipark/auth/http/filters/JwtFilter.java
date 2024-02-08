@@ -50,9 +50,6 @@ public class JwtFilter {
     }
 
     private Mono<ServerResponse> createUnauthorizedResponse(String message) {
-        return ServerResponse
-                .ok()
-                .build()
-                .then(Mono.error(new UnauthorizedException(message)));
+        return Mono.error(new UnauthorizedException(message));
     }
 }

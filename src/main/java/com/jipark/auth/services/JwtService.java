@@ -58,23 +58,27 @@ public class JwtService {
     }
 
     public JwtResponse generateJwtToken(User user) {
+        return generateJwtToken(user.getId());
+    }
+
+    public JwtResponse generateJwtToken(long id) {
         return new JwtResponse(
-                getAccessToken(user),
-                getRefreshToken(user),
+                getAccessToken(id),
+                getRefreshToken(id),
                 expiresIn
         );
     }
 
-    public String getAccessToken(User user) {
+    private String getAccessToken(long id) {
         return getToken(new HashMap<>() {{
-            put("id", user.getId());
+            put("id", id);
             put("token_type", "access");
         }}, expiresIn);
     }
 
-    public String getRefreshToken(User user) {
+    private String getRefreshToken(long id) {
         return getToken(new HashMap<>() {{
-            put("id", user.getId());
+            put("id", id);
             put("token_type", "refresh");
         }}, refreshExpiresIn);
     }

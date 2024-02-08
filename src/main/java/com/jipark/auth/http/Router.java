@@ -12,8 +12,7 @@ import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
-import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
-import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
+import static org.springframework.web.reactive.function.server.RequestPredicates.*;
 
 @Configuration(proxyBeanMethods = false)
 @RequiredArgsConstructor
@@ -42,7 +41,7 @@ public class Router {
     @Bean
     public RouterFunction<ServerResponse> routeWithRefreshToken() {
         return RouterFunctions
-                .route(GET("/token/refresh").and(accept(MediaType.ALL)), jwtController::refresh)
+                .route(POST("/token/refresh").and(accept(MediaType.ALL)), jwtController::refresh)
                 .filter(jwtFilter.handle("refresh"));
     }
 }
