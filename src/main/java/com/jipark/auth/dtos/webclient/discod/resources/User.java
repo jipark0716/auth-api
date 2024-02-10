@@ -24,6 +24,13 @@ public class User implements IUser {
     @JsonProperty("global_name")
     private String globalName;
 
+    @JsonProperty("avatar")
+    private String avatar;
+
+    public String getAvatar() {
+        return "https://cdn.discordapp.com/avatars/" + id + "/" + avatar + ".png";
+    }
+
     @JsonProperty("bot")
     private boolean bot;
 

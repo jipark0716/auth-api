@@ -46,7 +46,7 @@ public abstract class BaseOauthService {
     }
 
     protected User makeUser(IUser user) {
-        return new User(user.getUsername());
+        return new User(user.getUsername(), user.getAvatar());
     }
 
     protected OauthClientToken makeToken(IUser providerUser, User user, OauthGrantResponse token) {

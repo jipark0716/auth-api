@@ -21,6 +21,9 @@ public class User {
     @Column("name")
     private final String name;
 
+    @Column("avatar")
+    private final String avatar;
+
     @Column("updated_at")
     @ReadOnlyProperty
     private Timestamp updatedAt;
